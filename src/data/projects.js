@@ -1,0 +1,195 @@
+export const projects = [
+  {
+    id: 'construction-ai',
+    title: 'Construction Intelligence Platform',
+    subtitle: 'AI-assisted business monitoring system',
+    category: 'AI & Automation',
+    semester: 'Current',
+    featured: true,
+    status: 'In Progress',
+    description: `I am currently working on a personalized business management and monitoring platform for our construction firm, designed to convert daily site updates, material usage, transactions, and work progress into an intelligent queryable system.
+
+The current concept uses an AI chat-based interface where daily reports are stored in the backend and later queried through an AI agent. For example, instead of manually searching through reports, a user could ask: "How much material was used on a particular site?" or "What work was completed this week?" and receive a structured response.
+
+The long-term vision is to build a smart operational dashboard where supervisors, engineers, and workers can update site activity, while management can monitor progress, spending, resource usage, and bottlenecks through AI-assisted insights.`,
+    highlights: [
+      'AI-powered business monitoring',
+      'Daily report storage',
+      'Natural language querying',
+      'Construction site updates',
+      'Material and transaction tracking',
+      'Future dashboard and role-based updates',
+    ],
+    techStack: ['React.js', 'Node.js', 'NoSQL', 'AI/NLP', 'REST APIs'],
+    architecture: {
+      nodes: ['Daily Reports', 'Backend Storage', 'AI Agent', 'Natural Language Query', 'Insight Response'],
+      flow: 'linear',
+    },
+    problem: 'Construction firms generate massive daily data across multiple sites — material usage, transactions, labor updates — all tracked manually with no queryable structure.',
+    approach: 'Building an AI-powered chat interface over structured report storage, enabling natural language queries to extract insights from construction operations data.',
+    challenges: 'Designing a schema flexible enough to handle varied daily reports while maintaining queryability through AI agents.',
+    futurScope: 'Smart operational dashboard with role-based access, automated alerts for budget overruns, and predictive resource planning.',
+    githubUrl: 'https://github.com/kashyapnasit109/DOQ_KB',
+    liveUrl: 'https://docqa-henna.vercel.app/',
+  },
+  {
+    id: 'nexus-command-tracker',
+    title: 'Nexus Command Tracker',
+    subtitle: 'OCR-powered attendance intelligence platform',
+    category: 'Automation',
+    semester: 'Semester 4',
+    featured: false,
+    status: 'Completed',
+    description: `Nexus Command Tracker is a personalized attendance monitoring system designed to simplify academic attendance tracking through a clean digital interface and OCR-assisted data extraction. The system focuses on reducing manual entry, improving visibility into attendance records, and creating a more organized way to monitor academic consistency.
+
+The project reflects my interest in combining practical automation with user-focused design, where raw attendance information can be captured, processed, and presented in a structured way for easier decision-making.`,
+    highlights: [
+      'OCR-based attendance data reading',
+      'Student-focused dashboard experience',
+      'Structured tracking of attendance records',
+      'Built to reduce manual monitoring',
+      'Practical use of automation in academic workflow',
+    ],
+    techStack: ['React.js', 'OCR Engine', 'JavaScript', 'CSS', 'REST APIs'],
+    architecture: {
+      nodes: ['Image Upload', 'OCR Extraction', 'Data Cleaning', 'Attendance Record', 'Dashboard'],
+      flow: 'linear',
+    },
+    problem: 'Academic attendance tracking is tedious, error-prone, and relies heavily on manual data entry.',
+    approach: 'Built an OCR-assisted digital interface that extracts attendance data from images and presents it in a structured, queryable dashboard.',
+    challenges: 'Ensuring OCR accuracy across different handwriting styles and image quality levels.',
+    futurScope: 'Machine learning-based handwriting recognition, predictive attendance alerts, and integration with institutional systems.',
+    githubUrl: 'https://github.com/kashyapnasit109/',
+    liveUrl: 'https://nexus-tracker.vercel.app',
+  },
+  {
+    id: 'saludecare',
+    title: 'Saludecare',
+    subtitle: 'Structured hospital management platform',
+    category: 'Database Systems',
+    semester: 'Semester 4',
+    featured: false,
+    status: 'Completed',
+    description: `Saludecare is a collaborative hospital management system developed to organize healthcare-related operations through structured digital workflows. The platform is designed around essential hospital entities such as patients, doctors, appointments, records, and administrative data.
+
+My contribution focused strongly on the data layer and system structure, ensuring that information could be stored, related, and accessed in a meaningful way. This project helped me understand how database design, entity relationships, and backend thinking support real-world management systems.`,
+    highlights: [
+      'Healthcare workflow management',
+      'Patient and administrative data organization',
+      'Database-oriented system structure',
+      'Team-based software development',
+      'Practical understanding of real-world entities',
+    ],
+    techStack: ['Database Design', 'SQL', 'Entity Modeling', 'Backend Logic', 'Team Collaboration'],
+    architecture: {
+      nodes: ['Users', 'Hospital Modules', 'Database', 'Records / Appointments / Reports'],
+      flow: 'linear',
+    },
+    problem: 'Hospital operations involve complex entity relationships — patients, doctors, appointments, records — that need structured digital organization.',
+    approach: 'Designed the data layer with clear entity relationships, ensuring information could be stored, queried, and managed reliably across hospital workflows.',
+    challenges: 'Modeling complex healthcare entity relationships while maintaining data integrity and query performance.',
+    futurScope: 'Integration with real hospital APIs, appointment scheduling AI, and patient portal with secure data access.',
+    githubUrl: 'https://github.com/kashyapnasit109/',
+    liveUrl: 'https://saludecare.vercel.app',
+  },
+  {
+    id: 'voice-controlled-car',
+    title: 'Autonomous Voice-Controlled Car',
+    subtitle: 'Hardware automation and sensor-based mobility project',
+    category: 'Hardware & IoT',
+    semester: 'Semester 1',
+    featured: false,
+    status: 'Completed',
+    description: `This first-semester hardware project combined embedded systems, electronics, and automation by developing a voice-controlled and obstacle-avoiding robotic car. Built as a team project, it introduced me to the connection between software logic and physical movement, where commands, sensors, and control decisions directly affected real-world behavior.
+
+The project strengthened my early understanding of automation, sensor-based decision-making, hardware-software interaction, and practical problem-solving beyond traditional desktop or web applications.`,
+    highlights: [
+      'Voice command-based control',
+      'Obstacle detection and avoidance',
+      'Arduino/electronics-based implementation',
+      'Sensor-driven decision-making',
+      'Hardware-software integration',
+    ],
+    techStack: ['Arduino', 'C/C++', 'Sensors', 'Electronics', 'Voice Module'],
+    architecture: {
+      nodes: ['Voice Command', 'Arduino Controller', 'Sensor Array', 'Motor Control', 'Movement'],
+      flow: 'linear',
+    },
+    problem: 'Understanding how software logic translates to physical-world actions through embedded systems.',
+    approach: 'Built a robotic car that responds to voice commands and autonomously avoids obstacles using sensor arrays.',
+    challenges: 'Calibrating sensor sensitivity and handling real-time decision-making with limited microcontroller resources.',
+    futurScope: 'GPS-based navigation, camera integration for object recognition, and remote control via mobile app.',
+    githubUrl: 'https://github.com/kashyapnasit109/',
+    liveUrl: null,
+  },
+  {
+    id: 'silicon-lottery',
+    title: 'Silicon Lottery',
+    subtitle: 'Interactive learning experience for silicon wafer concepts',
+    category: 'Educational Web',
+    semester: 'Semester 4',
+    featured: false,
+    status: 'Completed',
+    description: `Silicon Lottery is an educational web project created to strengthen and present the understanding of silicon wafers, chip manufacturing concepts, and the underlying principles connected to computer organization and architecture.
+
+Instead of presenting the topic as static theory, the website transforms a technical academic concept into an interactive learning experience, helping users understand how hardware-level manufacturing ideas connect with computing systems.`,
+    highlights: [
+      'Educational technical website',
+      'Silicon wafer and manufacturing concepts',
+      'COA-focused learning',
+      'Interactive explanation format',
+      'Academic concept visualization',
+    ],
+    techStack: ['React.js', 'JavaScript', 'CSS', 'HTML', 'Vite'],
+    architecture: {
+      nodes: ['User Interface', 'Interactive Modules', 'Concept Visualization', 'Learning Assessment'],
+      flow: 'linear',
+    },
+    problem: 'Computer Organization concepts like silicon wafer manufacturing are taught as dry theory with no interactive exploration.',
+    approach: 'Created an interactive web experience that transforms COA concepts into visual, explorable learning modules.',
+    challenges: 'Making deeply technical concepts accessible and engaging without oversimplifying the science.',
+    futurScope: 'Adding more COA topics, quiz system, progress tracking, and integration with academic curricula.',
+    githubUrl: 'https://github.com/kashyapnasit109/',
+    liveUrl: 'https://silicon-lottery.vercel.app',
+  },
+  {
+    id: 'algorithmic-thinking-lab',
+    title: 'Algorithmic Thinking Lab',
+    subtitle: 'DSA/DAA reasoning, complexity, and problem-solving exploration',
+    category: 'Computer Science',
+    semester: 'Ongoing',
+    featured: false,
+    status: 'In Progress',
+    description: `I am actively developing strong conceptual and practical understanding of Data Structures, Design and Analysis of Algorithms, and algorithmic behavior. My focus is not only on solving problems, but also on understanding why an algorithm works, how its complexity changes with input size, and how different approaches behave under constraints.
+
+This ongoing exploration strengthens my ability to reason about efficiency, correctness, optimization, and problem decomposition — skills that are essential for building reliable software systems.`,
+    highlights: [
+      'Algorithm analysis and reasoning',
+      'Complexity comparison and optimization',
+      'Problem decomposition techniques',
+      'Data structure implementation',
+      'Efficiency-focused thinking',
+    ],
+    techStack: ['Java', 'C', 'C++', 'Algorithm Design', 'Complexity Analysis'],
+    architecture: {
+      nodes: ['Problem Analysis', 'Algorithm Selection', 'Complexity Evaluation', 'Optimization', 'Implementation'],
+      flow: 'linear',
+    },
+    problem: 'Understanding algorithms at a deep level — not just implementing them, but reasoning about why they work and how they behave under constraints.',
+    approach: 'Systematic exploration of DSA/DAA through implementation, analysis, and comparison of algorithmic approaches.',
+    challenges: 'Bridging the gap between theoretical complexity analysis and practical performance in real applications.',
+    futurScope: 'Building interactive visualizers, contributing to open-source algorithm libraries, and competitive programming.',
+    githubUrl: 'https://github.com/kashyapnasit109/',
+    liveUrl: null,
+  },
+];
+
+export const categories = [
+  'All',
+  'Automation',
+  'Database Systems',
+  'Hardware & IoT',
+  'Educational Web',
+  'Computer Science',
+  'AI & Automation'
+];
