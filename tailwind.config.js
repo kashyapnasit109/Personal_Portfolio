@@ -1,56 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
-        primary: {
-          dark: '#050505',
-          darker: '#000000',
-          light: '#F4F4F5',
-        },
-        accent: {
-          DEFAULT: '#C6F135', // Vibrant lime/chartreuse
-          hover: '#b1d92f',
-        },
-        surface: {
-          DEFAULT: '#111111',
-          border: '#222222',
-        },
-        text: {
-          primary: '#F4F4F5',
-          secondary: '#A1A1AA',
-          muted: '#52525B',
-        }
+        ink: { DEFAULT: '#06080D', 2: '#0B0F17', 3: '#111726' },
+        ivory: { DEFAULT: '#ECE7DD', 2: '#E2DCCF', dim: '#B9B3A7' },
+        glass: { DEFAULT: '#9DB8FF', deep: '#3D6FE0' },
+        mute: '#8A92A3',
+        line: 'rgba(236,231,221,0.12)',
+        lineInk: 'rgba(6,8,13,0.14)',
       },
       fontFamily: {
-        heading: ['Outfit', 'sans-serif'], // Or we can import a brutalist font if needed
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        display: ['"Bricolage Grotesque Variable"', 'system-ui', 'sans-serif'],
+        sans: ['"Geist Variable"', 'system-ui', 'sans-serif'],
+        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+        mono: ['"JetBrains Mono Variable"', 'ui-monospace', 'monospace'],
       },
-      fontSize: {
-        'display': ['clamp(3rem, 10vw, 10rem)', { lineHeight: '0.9', letterSpacing: '-0.02em' }],
-        'huge': ['clamp(2rem, 8vw, 6rem)', { lineHeight: '1', letterSpacing: '-0.02em' }],
+      letterSpacing: { tightest: '-0.055em' },
+      transitionTimingFunction: {
+        expo: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        quart: 'cubic-bezier(0.76, 0, 0.24, 1)',
       },
-      animation: {
-        'marquee': 'marquee 25s linear infinite',
-        'marquee-reverse': 'marquee-reverse 25s linear infinite',
-        'spin-slow': 'spin 15s linear infinite',
-      },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
-        'marquee-reverse': {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(0%)' },
-        }
-      }
+      maxWidth: { frame: '1440px' },
     },
   },
   plugins: [],
-}
+};
