@@ -1,49 +1,61 @@
 export const assistantResponses = {
-  greetings: [
-    "Hello! I'm Kashyap's portfolio assistant. Ask me anything about his projects, skills, or how to collaborate with him.",
-  ],
+  greeting:
+    "Hi — I'm the guide to Kashyap's work. Ask about his projects, the hackathon win, SIH, what he's building now, or how to reach him.",
   questions: [
     {
-      patterns: ['projects', 'built', 'work', 'portfolio', 'what has'],
-      answer: "Kashyap has built 6 major projects: an AI-powered Construction Intelligence Platform, Nexus Command Tracker (OCR attendance), Saludecare (hospital management), a Voice-Controlled Car, Silicon Lottery (COA learning website), and an ongoing Algorithmic Thinking Lab. His featured project is the Construction Intelligence Platform — an AI-assisted business monitoring system for construction firms.",
+      patterns: ['project', 'built', 'work', 'portfolio', 'made'],
+      answer:
+        'Core projects: AUREX (enterprise intelligence platform — won the GDG × DezAI hackathon), VIGINT / SentinelVision (visual-intelligence system, selected at SIH university level), Satva Laser (a client site delivered to production) and Nexus Command (OCR attendance intelligence). In the lab: Hawk-i, an AI CCTV command center heading to enterprise deployment. Earlier work includes Saludecare, Silicon Lottery and a Construction Intelligence platform.',
     },
     {
-      patterns: ['strongest', 'best', 'expertise', 'strong', 'specializ'],
-      answer: "Kashyap's strongest areas are: (1) Full-stack system thinking — combining frontend, backend, and data layer design, (2) Practical automation — building systems that reduce manual work through OCR and AI, and (3) Algorithmic reasoning — understanding how algorithms behave and optimize under constraints. He's especially strong in Java, React.js, and database design.",
+      patterns: ['aurex', 'hackathon', 'win', 'gdg', 'dezai', 'enterprise'],
+      answer:
+        'AUREX solves three enterprise silos at once: Quant Studio (walk-forward backtesting that prevents look-ahead bias), DataMart (DuckDB OLAP over 1M+ rows with anomaly detection) and Aiden AI (a retail assistant grounded in warehouse tables, every answer stamped with a SHA-256 lineage hash). It won the GDG × DezAI hackathon and is deployed standalone at aurexaiden.vercel.app.',
     },
     {
-      patterns: ['currently', 'working on', 'now', 'current'],
-      answer: "Kashyap is currently building an AI-powered Construction Intelligence Platform for his family's construction firm. It converts daily site updates, material usage, and transactions into a queryable system using natural language AI. He's also actively deepening his DSA/DAA knowledge.",
+      patterns: ['sih', 'vigint', 'sentinel', 'smart india', 'cctv', 'vision'],
+      answer:
+        'VIGINT is the main unified system. SentinelVision is its Smart India Hackathon track — AI forensic search across CCTV footage by keyword or reference image — and it was selected at the university level for further SIH rounds. Sentinel is the government-facing edition, kept as a separate build to avoid conflicts. Hawk-i is the derivative product for enterprises.',
     },
     {
-      patterns: ['collaborate', 'hire', 'intern', 'contact', 'work with', 'reach'],
-      answer: "Kashyap is open to internships, collaborative technical projects, research-based learning opportunities, and practical software development work. You can reach him at Kashyapnasit12345@gmail.com or connect on LinkedIn. He's looking for roles where he can contribute, learn, and grow through meaningful problem-solving.",
+      patterns: ['hawk', 'current', 'now', 'building', 'working on'],
+      answer:
+        'Right now Kashyap is building Hawk-i — a unified CCTV intelligence platform with six modules (ANPR, object misplacement, semantic search, velocity, unauthorized entry, threat detection), RBAC and a live alert lifecycle — and preparing it for client and enterprise deployment. In parallel, VIGINT is advancing through SIH.',
     },
     {
-      patterns: ['construction', 'ai platform', 'business', 'doq', 'kashyap builders'],
-      answer: "The Construction Intelligence Platform is Kashyap's featured project. It's a personalized business management system for their construction firm that uses AI to convert daily site reports, material usage, and transaction data into queryable insights. Users can ask natural language questions like 'How much material was used on site X?' and get structured responses. Built with React.js, Node.js, NoSQL, and AI/NLP.",
+      patterns: ['satva', 'client', 'freelance', 'laser'],
+      answer:
+        'Satva Laser is a precision laser-cutting studio in Ahmedabad. Kashyap designed and built their site end to end — a self-drawing logo loader, scroll-driven canvas cinema and an inquiry cart that sends straight to WhatsApp. It is live at satva-laser.vercel.app.',
     },
     {
-      patterns: ['skill', 'tech', 'language', 'stack', 'know'],
-      answer: "Kashyap's technical skills span: Programming (Java, C, C++, JavaScript), Frontend (React.js, HTML, CSS), Data & Backend (NoSQL, Database Design, CRUD, Data Modeling), Core CS (DSA, DAA, Networking, Computer Organization), and AI & Automation (OCR, NLP querying, AI workflows). His approach focuses on understanding systems, not just syntax.",
+      patterns: ['nexus', 'attendance', 'ocr'],
+      answer:
+        'Nexus Command reads attendance from images using OCR, structures the records and shows each student where they stand. It is live at temp-app-delta.vercel.app.',
     },
     {
-      patterns: ['education', 'study', 'college', 'university', 'degree'],
-      answer: "Kashyap is a Computer Science student who has completed the 4th semester. His learning approach goes beyond syntax and tools — he focuses on understanding how systems behave, how data flows, how algorithms make decisions, and how technology can be shaped into meaningful real-world solutions.",
+      patterns: ['skill', 'tech', 'stack', 'language', 'know'],
+      answer:
+        'Languages: Java, C, C++, JavaScript, TypeScript, Python, SQL. Interfaces: React 19, Next.js, Tailwind, GSAP, Three.js. Backend & data: Node/Express, FastAPI, MySQL, PostgreSQL + pgvector, DuckDB. AI & vision: YOLOv8, EasyOCR, ByteTrack, OpenCV, embeddings, grounded RAG. Plus DSA, DAA, networks, COA, MQTT and Docker.',
     },
     {
-      patterns: ['github', 'repo', 'code', 'open source'],
-      answer: "You can find Kashyap's work on GitHub at github.com/kashyapnasit109. His notable repositories include DOQ_KB (Document Intelligence for Kashyap Builders) and forage-midas (JPMC Advanced Software Engineering Forage program). He's actively building more repositories for his portfolio projects.",
+      patterns: ['education', 'study', 'college', 'university', 'semester', 'charusat'],
+      answer:
+        'Kashyap is a B.Tech Computer Science student at CHARUSAT University, currently in Semester 5.',
+    },
+    {
+      patterns: ['contact', 'hire', 'intern', 'collaborate', 'email', 'reach', 'phone', 'call', 'instagram', 'linkedin', 'number'],
+      answer:
+        'Use the inquiry form on the Contact page — it drafts an email to kashyapnasit12345@gmail.com for you. You can also call +91 63557 02811, or find him on LinkedIn (kashyap-nasit-5240b3341) and Instagram (@kashyap__nasit). He is open to internships, client builds, hackathon team-ups and collaborations.',
     },
   ],
-  fallback: "I don't have a specific answer for that, but feel free to reach out to Kashyap directly at Kashyapnasit12345@gmail.com! You can also explore the portfolio sections above for more details.",
+  fallback:
+    "I don't have a precise answer for that — the fastest route is the inquiry form on the Contact page, which drafts a mail straight to Kashyap.",
 };
 
 export const suggestedQuestions = [
-  "What projects has Kashyap built?",
-  "What is his strongest technical area?",
-  "What is he currently working on?",
-  "How can I collaborate with him?",
-  "Explain his AI construction platform.",
-  "What skills does he have?",
+  'What did AUREX win?',
+  'What is VIGINT / SentinelVision?',
+  'What are you building now?',
+  'Tell me about the client project',
+  'What is your stack?',
 ];
