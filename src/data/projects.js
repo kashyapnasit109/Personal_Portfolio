@@ -1,195 +1,195 @@
-export const projects = [
+/*
+  Every fact below is taken from the project's own repository, documentation or live build.
+  Flagships = core projects. Lab = in active build. Archive = earlier work.
+*/
+
+export const flagships = [
+  {
+    id: 'aurex',
+    index: '01',
+    title: 'AUREX',
+    kicker: 'Enterprise Intelligence Platform',
+    badge: 'Winner — GDG × DezAI Hackathon',
+    tone: 'lime',
+    year: '2026',
+    role: 'Team build · full-stack & architecture',
+    status: 'Live · standalone deployment',
+    summary:
+      'Large enterprises run their quant desks, BI dashboards and customer AI as three disconnected silos. AUREX fuses them into one closed loop — data → analysis → intelligence → decision → action — and it won the GDG × DezAI hackathon it was built for.',
+    problems: [
+      {
+        name: 'Quant Studio',
+        text: 'Strategy backtesting with walk-forward isolation that structurally prevents look-ahead bias; Sharpe, Sortino, Calmar, drawdown and stress tests.',
+      },
+      {
+        name: 'DataMart',
+        text: 'DuckDB in-memory OLAP over 1M+ transactional rows with sub-second queries, z-score anomaly detection and natural-language → SQL.',
+      },
+      {
+        name: 'Aiden AI',
+        text: 'A grounded retail assistant that answers only from warehouse catalog tables and stamps every reply with a SHA-256 lineage hash — no hallucinated stock.',
+      },
+    ],
+    stack: ['React 19', 'TypeScript', 'FastAPI', 'DuckDB', 'NumPy / Pandas', 'RAG', 'Recharts', 'Pub/Sub event bus'],
+    shots: ['/img/aurex-ov.webp', '/img/aurex-quant.webp', '/img/aurex-dm.webp'],
+    live: 'https://aurexaiden.vercel.app/app/overview',
+    code: 'https://github.com/kashyapnasit109/AUREX/tree/main6',
+  },
+  {
+    id: 'vigint',
+    index: '02',
+    title: 'VIGINT',
+    kicker: 'SentinelVision · Sentinel — Visual Intelligence Network',
+    badge: 'SIH — selected at university level',
+    tone: 'cyan',
+    year: '2026',
+    role: 'Core system architect',
+    status: 'Advancing to further SIH rounds',
+    summary:
+      'Our main system. VIGINT turns passive CCTV and isolated IoT sensors into a live incident-intelligence operating system: it perceives, fuses evidence across sensors, scores risk and coordinates response — with a cryptographic chain of custody for every clip.',
+    problems: [
+      {
+        name: 'SentinelVision',
+        text: 'The Smart India Hackathon track: AI forensic search over hours of footage by natural-language keyword or reference image, with timestamped, exportable, hash-sealed results.',
+      },
+      {
+        name: 'Sentinel',
+        text: 'The government-facing edition of the same unified system, kept as a separate build so both tracks evolve without conflicts.',
+      },
+      {
+        name: 'Fusion core',
+        text: 'YOLOv8 perception, CLIP embeddings in pgvector for search, multi-sensor evidence fusion to suppress false alarms, and SHA-256 sealed evidence dossiers.',
+      },
+    ],
+    stack: ['Next.js', 'FastAPI', 'PyTorch', 'YOLOv8', 'FaceNet', 'CLIP + pgvector', 'MQTT', 'Docker'],
+    shots: ['/img/vigint-home.webp', '/img/vigint-incidents.webp', '/img/vigint-verify.webp'],
+    live: null,
+    code: null,
+  },
+  {
+    id: 'satva',
+    index: '03',
+    title: 'Satva Laser',
+    kicker: 'Client project — precision laser-cut metal, Ahmedabad',
+    badge: 'Delivered to client',
+    tone: 'brass',
+    year: '2026',
+    role: 'Design & engineering, end to end',
+    status: 'In production',
+    summary:
+      'A cinematic, multi-page site for a laser-cutting studio in Gota, Ahmedabad that makes architectural jaali screens, murals and bespoke metal fittings. Built to feel like the craft itself — and to turn browsing into enquiries.',
+    problems: [
+      {
+        name: 'Brand as motion',
+        text: 'The diamond mark draws itself edge by edge behind a glowing spark, and every page transition replays the same gesture.',
+      },
+      {
+        name: 'Scroll cinema',
+        text: 'A frame-by-frame canvas sequence with glass HUD overlays walks visitors through the cutting process.',
+      },
+      {
+        name: 'Inquiry cart',
+        text: 'Visitors collect pieces into a list and send it straight to the studio on WhatsApp — the shortest path from interest to order.',
+      },
+    ],
+    stack: ['Vite multi-page', 'Vanilla JS', 'GSAP + ScrollTrigger', 'Canvas sequence', 'Design tokens'],
+    shots: ['/img/satva-jaali-partition.webp', '/img/satva-tree-mural.webp', '/img/satva-horse-mural.webp'],
+    live: 'https://satva-laser.vercel.app/',
+    code: 'https://github.com/kashyapnasit109/SATVA',
+  },
+  {
+    id: 'nexus',
+    index: '04',
+    title: 'Nexus Command',
+    kicker: 'OCR-powered attendance intelligence',
+    badge: 'Core project',
+    tone: 'ivory',
+    year: '2025',
+    role: 'Solo build',
+    status: 'Live',
+    summary:
+      'Attendance tracking without the spreadsheet. Nexus reads attendance straight from images with OCR, cleans it into structured records and gives every student a dashboard of where they stand — with Google sign-in and profile onboarding.',
+    problems: [
+      { name: 'Capture', text: 'Upload a photo of the register or portal; OCR extracts the rows.' },
+      { name: 'Structure', text: 'Records are cleaned and stored per subject, per day.' },
+      { name: 'Decide', text: 'A dashboard shows standing and what it takes to stay above the line.' },
+    ],
+    stack: ['React.js', 'OCR engine', 'REST APIs', 'Google auth'],
+    shots: [],
+    live: 'https://temp-app-delta.vercel.app/',
+    code: null,
+  },
+];
+
+export const lab = {
+  id: 'hawk-i',
+  title: 'Hawk-i',
+  kicker: 'Unified AI-powered CCTV intelligence',
+  status: 'In active build — preparing client & enterprise deployment',
+  relation:
+    'Hawk-i is the productised derivative of VIGINT: the same perception core, packaged as a security command center that a campus, society or enterprise can install and run.',
+  modules: [
+    { n: '01', name: 'ANPR', text: 'YOLOv8 plate detection + EasyOCR, matched against the registered-vehicle database.' },
+    { n: '02', name: 'Object misplacement', text: 'Reference-vs-current frame differencing flags new or missing objects.' },
+    { n: '03', name: 'Semantic search', text: 'MiniLM embeddings let operators search event history in plain language.' },
+    { n: '04', name: 'Velocity', text: 'ByteTrack tracking with perspective calibration estimates vehicle speed live.' },
+    { n: '05', name: 'Unauthorized entry', text: 'Perimeter polygons correlated with gate logs to separate visitors from intruders.' },
+    { n: '06', name: 'Threat & anomaly', text: 'Rule heuristics over detections — loitering at night, weapon classes, crowding.' },
+  ],
+  platform: ['JWT RBAC — Admin / Operator / Viewer', 'Node + Express gateway', 'Python FastAPI ML service', 'MySQL with offline fallback', 'Live alert lifecycle'],
+  shot: '/img/hawki-dash.webp',
+  code: 'https://github.com/kashyapnasit109/CS030_HAWK-I',
+};
+
+export const archive = [
   {
     id: 'construction-ai',
     title: 'Construction Intelligence Platform',
-    subtitle: 'AI-assisted business monitoring system',
-    category: 'AI & Automation',
-    semester: 'Current',
-    featured: true,
-    status: 'In Progress',
-    description: `I am currently working on a personalized business management and monitoring platform for our construction firm, designed to convert daily site updates, material usage, transactions, and work progress into an intelligent queryable system.
-
-The current concept uses an AI chat-based interface where daily reports are stored in the backend and later queried through an AI agent. For example, instead of manually searching through reports, a user could ask: "How much material was used on a particular site?" or "What work was completed this week?" and receive a structured response.
-
-The long-term vision is to build a smart operational dashboard where supervisors, engineers, and workers can update site activity, while management can monitor progress, spending, resource usage, and bottlenecks through AI-assisted insights.`,
-    highlights: [
-      'AI-powered business monitoring',
-      'Daily report storage',
-      'Natural language querying',
-      'Construction site updates',
-      'Material and transaction tracking',
-      'Future dashboard and role-based updates',
-    ],
-    techStack: ['React.js', 'Node.js', 'NoSQL', 'AI/NLP', 'REST APIs'],
-    architecture: {
-      nodes: ['Daily Reports', 'Backend Storage', 'AI Agent', 'Natural Language Query', 'Insight Response'],
-      flow: 'linear',
-    },
-    problem: 'Construction firms generate massive daily data across multiple sites — material usage, transactions, labor updates — all tracked manually with no queryable structure.',
-    approach: 'Building an AI-powered chat interface over structured report storage, enabling natural language queries to extract insights from construction operations data.',
-    challenges: 'Designing a schema flexible enough to handle varied daily reports while maintaining queryability through AI agents.',
-    futurScope: 'Smart operational dashboard with role-based access, automated alerts for budget overruns, and predictive resource planning.',
-    githubUrl: 'https://github.com/kashyapnasit109/DOQ_KB',
-    liveUrl: 'https://docqa-henna.vercel.app/',
-  },
-  {
-    id: 'nexus-command-tracker',
-    title: 'Nexus Command Tracker',
-    subtitle: 'OCR-powered attendance intelligence platform',
-    category: 'Automation',
-    semester: 'Semester 4',
-    featured: false,
-    status: 'Completed',
-    description: `Nexus Command Tracker is a personalized attendance monitoring system designed to simplify academic attendance tracking through a clean digital interface and OCR-assisted data extraction. The system focuses on reducing manual entry, improving visibility into attendance records, and creating a more organized way to monitor academic consistency.
-
-The project reflects my interest in combining practical automation with user-focused design, where raw attendance information can be captured, processed, and presented in a structured way for easier decision-making.`,
-    highlights: [
-      'OCR-based attendance data reading',
-      'Student-focused dashboard experience',
-      'Structured tracking of attendance records',
-      'Built to reduce manual monitoring',
-      'Practical use of automation in academic workflow',
-    ],
-    techStack: ['React.js', 'OCR Engine', 'JavaScript', 'CSS', 'REST APIs'],
-    architecture: {
-      nodes: ['Image Upload', 'OCR Extraction', 'Data Cleaning', 'Attendance Record', 'Dashboard'],
-      flow: 'linear',
-    },
-    problem: 'Academic attendance tracking is tedious, error-prone, and relies heavily on manual data entry.',
-    approach: 'Built an OCR-assisted digital interface that extracts attendance data from images and presents it in a structured, queryable dashboard.',
-    challenges: 'Ensuring OCR accuracy across different handwriting styles and image quality levels.',
-    futurScope: 'Machine learning-based handwriting recognition, predictive attendance alerts, and integration with institutional systems.',
-    githubUrl: 'https://github.com/kashyapnasit109/',
-    liveUrl: 'https://nexus-tracker.vercel.app',
+    tag: 'AI & automation',
+    period: 'Sem 04 → now',
+    text: 'Daily site reports, material use and transactions for our family construction firm, queryable in natural language ("how much steel went to site X this week?").',
+    stack: ['React', 'Node.js', 'NoSQL', 'NLP'],
+    live: 'https://docqa-henna.vercel.app/',
+    code: 'https://github.com/kashyapnasit109/DOQ_KB',
   },
   {
     id: 'saludecare',
     title: 'Saludecare',
-    subtitle: 'Structured hospital management platform',
-    category: 'Database Systems',
-    semester: 'Semester 4',
-    featured: false,
-    status: 'Completed',
-    description: `Saludecare is a collaborative hospital management system developed to organize healthcare-related operations through structured digital workflows. The platform is designed around essential hospital entities such as patients, doctors, appointments, records, and administrative data.
-
-My contribution focused strongly on the data layer and system structure, ensuring that information could be stored, related, and accessed in a meaningful way. This project helped me understand how database design, entity relationships, and backend thinking support real-world management systems.`,
-    highlights: [
-      'Healthcare workflow management',
-      'Patient and administrative data organization',
-      'Database-oriented system structure',
-      'Team-based software development',
-      'Practical understanding of real-world entities',
-    ],
-    techStack: ['Database Design', 'SQL', 'Entity Modeling', 'Backend Logic', 'Team Collaboration'],
-    architecture: {
-      nodes: ['Users', 'Hospital Modules', 'Database', 'Records / Appointments / Reports'],
-      flow: 'linear',
-    },
-    problem: 'Hospital operations involve complex entity relationships — patients, doctors, appointments, records — that need structured digital organization.',
-    approach: 'Designed the data layer with clear entity relationships, ensuring information could be stored, queried, and managed reliably across hospital workflows.',
-    challenges: 'Modeling complex healthcare entity relationships while maintaining data integrity and query performance.',
-    futurScope: 'Integration with real hospital APIs, appointment scheduling AI, and patient portal with secure data access.',
-    githubUrl: 'https://github.com/kashyapnasit109/',
-    liveUrl: 'https://saludecare.vercel.app',
-  },
-  {
-    id: 'voice-controlled-car',
-    title: 'Autonomous Voice-Controlled Car',
-    subtitle: 'Hardware automation and sensor-based mobility project',
-    category: 'Hardware & IoT',
-    semester: 'Semester 1',
-    featured: false,
-    status: 'Completed',
-    description: `This first-semester hardware project combined embedded systems, electronics, and automation by developing a voice-controlled and obstacle-avoiding robotic car. Built as a team project, it introduced me to the connection between software logic and physical movement, where commands, sensors, and control decisions directly affected real-world behavior.
-
-The project strengthened my early understanding of automation, sensor-based decision-making, hardware-software interaction, and practical problem-solving beyond traditional desktop or web applications.`,
-    highlights: [
-      'Voice command-based control',
-      'Obstacle detection and avoidance',
-      'Arduino/electronics-based implementation',
-      'Sensor-driven decision-making',
-      'Hardware-software integration',
-    ],
-    techStack: ['Arduino', 'C/C++', 'Sensors', 'Electronics', 'Voice Module'],
-    architecture: {
-      nodes: ['Voice Command', 'Arduino Controller', 'Sensor Array', 'Motor Control', 'Movement'],
-      flow: 'linear',
-    },
-    problem: 'Understanding how software logic translates to physical-world actions through embedded systems.',
-    approach: 'Built a robotic car that responds to voice commands and autonomously avoids obstacles using sensor arrays.',
-    challenges: 'Calibrating sensor sensitivity and handling real-time decision-making with limited microcontroller resources.',
-    futurScope: 'GPS-based navigation, camera integration for object recognition, and remote control via mobile app.',
-    githubUrl: 'https://github.com/kashyapnasit109/',
-    liveUrl: null,
+    tag: 'Database systems',
+    period: 'Sem 04',
+    text: 'Team hospital-management system; I owned the data layer — patients, doctors, appointments and records modelled with clean entity relationships.',
+    stack: ['SQL', 'Entity modelling', 'Backend logic'],
+    live: 'https://saludecare.vercel.app',
+    code: null,
   },
   {
     id: 'silicon-lottery',
     title: 'Silicon Lottery',
-    subtitle: 'Interactive learning experience for silicon wafer concepts',
-    category: 'Educational Web',
-    semester: 'Semester 4',
-    featured: false,
-    status: 'Completed',
-    description: `Silicon Lottery is an educational web project created to strengthen and present the understanding of silicon wafers, chip manufacturing concepts, and the underlying principles connected to computer organization and architecture.
-
-Instead of presenting the topic as static theory, the website transforms a technical academic concept into an interactive learning experience, helping users understand how hardware-level manufacturing ideas connect with computing systems.`,
-    highlights: [
-      'Educational technical website',
-      'Silicon wafer and manufacturing concepts',
-      'COA-focused learning',
-      'Interactive explanation format',
-      'Academic concept visualization',
-    ],
-    techStack: ['React.js', 'JavaScript', 'CSS', 'HTML', 'Vite'],
-    architecture: {
-      nodes: ['User Interface', 'Interactive Modules', 'Concept Visualization', 'Learning Assessment'],
-      flow: 'linear',
-    },
-    problem: 'Computer Organization concepts like silicon wafer manufacturing are taught as dry theory with no interactive exploration.',
-    approach: 'Created an interactive web experience that transforms COA concepts into visual, explorable learning modules.',
-    challenges: 'Making deeply technical concepts accessible and engaging without oversimplifying the science.',
-    futurScope: 'Adding more COA topics, quiz system, progress tracking, and integration with academic curricula.',
-    githubUrl: 'https://github.com/kashyapnasit109/',
-    liveUrl: 'https://silicon-lottery.vercel.app',
+    tag: 'Educational web',
+    period: 'Sem 04',
+    text: 'An interactive explainer that turns wafer fabrication and chip binning — dry COA theory — into something you can explore.',
+    stack: ['React', 'Vite', 'CSS'],
+    live: 'https://silicon-lottery.vercel.app',
+    code: null,
   },
   {
-    id: 'algorithmic-thinking-lab',
+    id: 'algo-lab',
     title: 'Algorithmic Thinking Lab',
-    subtitle: 'DSA/DAA reasoning, complexity, and problem-solving exploration',
-    category: 'Computer Science',
-    semester: 'Ongoing',
-    featured: false,
-    status: 'In Progress',
-    description: `I am actively developing strong conceptual and practical understanding of Data Structures, Design and Analysis of Algorithms, and algorithmic behavior. My focus is not only on solving problems, but also on understanding why an algorithm works, how its complexity changes with input size, and how different approaches behave under constraints.
-
-This ongoing exploration strengthens my ability to reason about efficiency, correctness, optimization, and problem decomposition — skills that are essential for building reliable software systems.`,
-    highlights: [
-      'Algorithm analysis and reasoning',
-      'Complexity comparison and optimization',
-      'Problem decomposition techniques',
-      'Data structure implementation',
-      'Efficiency-focused thinking',
-    ],
-    techStack: ['Java', 'C', 'C++', 'Algorithm Design', 'Complexity Analysis'],
-    architecture: {
-      nodes: ['Problem Analysis', 'Algorithm Selection', 'Complexity Evaluation', 'Optimization', 'Implementation'],
-      flow: 'linear',
-    },
-    problem: 'Understanding algorithms at a deep level — not just implementing them, but reasoning about why they work and how they behave under constraints.',
-    approach: 'Systematic exploration of DSA/DAA through implementation, analysis, and comparison of algorithmic approaches.',
-    challenges: 'Bridging the gap between theoretical complexity analysis and practical performance in real applications.',
-    futurScope: 'Building interactive visualizers, contributing to open-source algorithm libraries, and competitive programming.',
-    githubUrl: 'https://github.com/kashyapnasit109/',
-    liveUrl: null,
+    tag: 'Computer science',
+    period: 'Ongoing',
+    text: 'A running practice of implementing, analysing and comparing DSA/DAA approaches — why an algorithm works and how it scales, not just that it passes.',
+    stack: ['Java', 'C++', 'Complexity analysis'],
+    live: null,
+    code: null,
   },
-];
-
-export const categories = [
-  'All',
-  'Automation',
-  'Database Systems',
-  'Hardware & IoT',
-  'Educational Web',
-  'Computer Science',
-  'AI & Automation'
+  {
+    id: 'voice-car',
+    title: 'Voice-Controlled Robotic Car',
+    tag: 'Hardware & IoT',
+    period: 'Sem 01',
+    text: 'Team build: Arduino car driven by voice commands with ultrasonic obstacle avoidance — my first taste of software moving the physical world.',
+    stack: ['Arduino', 'C/C++', 'Sensors'],
+    live: null,
+    code: null,
+  },
 ];
