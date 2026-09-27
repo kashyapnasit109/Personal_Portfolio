@@ -1,130 +1,107 @@
-import { useState, useEffect, useCallback } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import Loader from './components/Loader';
+import { useEffect, useState, lazy, Suspense } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import BuildMap from './components/BuildMap';
-import FeaturedProject from './components/FeaturedProject';
-import Projects from './components/Projects';
-import SkillsSection from './components/SkillsSection';
-import AlgorithmSection from './components/AlgorithmSection';
-import GitHubPresence from './components/GitHubPresence';
-import Collaboration from './components/Collaboration';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Cursor from './components/Cursor';
 import CommandPalette from './components/CommandPalette';
 import AIAssistant from './components/AIAssistant';
-import ProjectModal from './components/ProjectModal';
-import { projects } from './data/projects';
+import { TransitionProvider } from './lib/transition';
+import { initSmoothScroll, initMagnetic, initTilt, initSpotlight, ScrollTrigger } from './lib/motion';
+import Home from './pages/Home';
 
-function App() {
-  const [loading, setLoading] = useState(true);
-  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
-  const [featuredModalOpen, setFeaturedModalOpen] = useState(false);
+const About = lazy(() => import('./pages/About'));
+const WorkPage = lazy(() => import('./pages/WorkPage'));
+const Lens = lazy(() => import('./pages/Lens'));
+const JourneyPage = lazy(() => import('./pages/JourneyPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
-  const featuredProject = projects.find((p) => p.featured);
+const TITLES = {
+  '/': 'Kashyap Nasit — A curious mind that builds with technology',
+  '/about': 'About — Kashyap Nasit',
+  '/work': 'Work — Kashyap Nasit',
+  '/lens': 'Lens — Kashyap Nasit',
+  '/journey': 'Journey — Kashyap Nasit',
+  '/contact': 'Contact — Kashyap Nasit',
+};
 
-  // Initialize Lenis smooth scroll
+function Shell() {
+  const [palette, setPalette] = useState(false);
+  const { pathname } = useLocation();
+
   useEffect(() => {
-    let lenis;
-    const initLenis = async () => {
-      try {
-        const Lenis = (await import('@studio-freight/lenis')).default;
-        lenis = new Lenis({
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          orientation: 'vertical',
-          smoothWheel: true,
-        });
-
-        function raf(time) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-      } catch (e) {
-        console.log('Lenis not available, using native scroll');
-      }
-    };
-
-    if (!loading) {
-      initLenis();
-    }
-
-    return () => {
-      lenis?.destroy();
-    };
-  }, [loading]);
-
-  // Ctrl+K command palette
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        setCommandPaletteOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.history.scrollRestoration = 'manual';
+    initSmoothScroll();
+    const a = initMagnetic();
+    const b = initTilt();
+    const c = initSpotlight();
+    return () => { a(); b(); c(); };
   }, []);
 
-  const handleLoaderComplete = useCallback(() => {
-    setLoading(false);
+  useEffect(() => {
+    document.title = TITLES[pathname] || 'Kashyap Nasit';
+    // re-measure every scroll-linked effect once the new page has actually laid out
+    const ts = [250, 900, 2200].map((ms) => setTimeout(() => ScrollTrigger.refresh(), ms));
+    return () => ts.forEach(clearTimeout);
+  }, [pathname]);
+
+  // whenever the page height changes (lazy pages, late images, fonts) positions are refreshed
+  useEffect(() => {
+    let last = document.documentElement.scrollHeight;
+    let t = null;
+    const ro = new ResizeObserver(() => {
+      const h = document.documentElement.scrollHeight;
+      if (Math.abs(h - last) < 4) return;
+      last = h;
+      clearTimeout(t);
+      t = setTimeout(() => ScrollTrigger.refresh(), 220);
+    });
+    ro.observe(document.body);
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener('load', onLoad);
+    document.fonts?.ready?.then(onLoad);
+    return () => { ro.disconnect(); clearTimeout(t); window.removeEventListener('load', onLoad); };
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setPalette((v) => !v);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   return (
-    <div className="relative">
-      {/* Noise texture overlay */}
-      <div className="noise-overlay" />
-
-      {/* Loader */}
-      <AnimatePresence>
-        {loading && <Loader onComplete={handleLoaderComplete} />}
-      </AnimatePresence>
-
-      {/* Main content */}
-      {!loading && (
-        <>
-          <Navbar onCommandPalette={() => setCommandPaletteOpen(true)} />
-
-          <main>
-            <Hero />
-            <About />
-            <BuildMap />
-            <FeaturedProject
-              project={featuredProject}
-              onViewDetails={() => setFeaturedModalOpen(true)}
-            />
-            <Projects />
-            <SkillsSection />
-            <AlgorithmSection />
-            <GitHubPresence />
-            <Collaboration />
-            <Contact />
-          </main>
-
-          <Footer />
-
-          {/* Floating components */}
-          <AIAssistant />
-
-          {/* Command Palette */}
-          <CommandPalette
-            isOpen={commandPaletteOpen}
-            onClose={() => setCommandPaletteOpen(false)}
-          />
-
-          {/* Featured project modal */}
-          <ProjectModal
-            project={featuredProject}
-            isOpen={featuredModalOpen}
-            onClose={() => setFeaturedModalOpen(false)}
-          />
-        </>
-      )}
+    <div className="grain relative">
+      <Cursor />
+      <Navbar onCommand={() => setPalette(true)} />
+      <main>
+        <Suspense fallback={<div className="min-h-[100svh] bg-ink" />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/work" element={<WorkPage />} />
+            <Route path="/lens" element={<Lens />} />
+            <Route path="/journey" element={<JourneyPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <Footer />
+      <AIAssistant />
+      <CommandPalette open={palette} onClose={() => setPalette(false)} />
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <TransitionProvider>
+      <Shell />
+    </TransitionProvider>
+  );
+}
