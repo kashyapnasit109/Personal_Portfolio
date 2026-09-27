@@ -1,113 +1,88 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiSearch, FiArrowRight } from 'react-icons/fi';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { site } from '../data/site';
+import { flagships, lab } from '../data/projects';
+import { getLenis } from '../lib/motion';
+import { useGo } from '../lib/transition';
+import { nav } from '../data/site';
 
-const commands = [
-  { label: 'Go to Projects', action: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },
-  { label: 'View Skills', action: () => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' }) },
-  { label: 'Open GitHub', action: () => window.open('https://github.com/kashyapnasit109/', '_blank') },
-  { label: 'Download Resume', action: () => { const a = document.createElement('a'); a.href = '/resume.pdf'; a.download = 'Kashyap_Nasit_Resume.pdf'; a.click(); } },
-  { label: 'Contact Kashyap', action: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) },
-];
+export default function CommandPalette({ open, onClose }) {
+  const [q, setQ] = useState('');
+  const [idx, setIdx] = useState(0);
+  const input = useRef(null);
+  const go = useGo();
 
-export default function CommandPalette({ isOpen, onClose }) {
-  const [search, setSearch] = useState('');
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const inputRef = useRef(null);
-
-  const filtered = commands.filter(c =>
-    c.label.toLowerCase().includes(search.toLowerCase())
+  const actions = useMemo(
+    () => [
+      { group: 'Go to', label: 'Index', run: () => go('/') },
+      ...nav.map((n) => ({ group: 'Go to', label: n.label, run: () => go(n.to) })),
+      ...flagships.filter((p) => p.live).map((p) => ({ group: 'Open live', label: p.title, run: () => window.open(p.live, '_blank', 'noopener') })),
+      ...[...flagships, lab].filter((p) => p.code).map((p) => ({ group: 'Source', label: `${p.title} on GitHub`, run: () => window.open(p.code, '_blank', 'noopener') })),
+      { group: 'Contact', label: 'Copy email address', run: () => navigator.clipboard?.writeText(site.email) },
+      { group: 'Contact', label: 'Write an inquiry', run: () => go('/contact') },
+      { group: 'Contact', label: 'GitHub profile', run: () => window.open(site.github, '_blank', 'noopener') },
+      { group: 'Contact', label: 'Instagram', run: () => window.open(site.instagram, '_blank', 'noopener') },
+      { group: 'Contact', label: 'LinkedIn', run: () => window.open(site.linkedin, '_blank', 'noopener') },
+      { group: 'Contact', label: `Call ${site.phone}`, run: () => { window.location.href = site.phoneHref; } },
+    ],
+    [go],
   );
 
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 100);
-      setSearch('');
-      setSelectedIndex(0);
-    }
-  }, [isOpen]);
+  const list = actions.filter((a) => `${a.group} ${a.label}`.toLowerCase().includes(q.toLowerCase()));
 
   useEffect(() => {
-    if (!isOpen) return;
-    const handleKey = (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        setSelectedIndex((prev) => Math.min(prev + 1, filtered.length - 1));
-      }
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        setSelectedIndex((prev) => Math.max(prev - 1, 0));
-      }
-      if (e.key === 'Enter' && filtered[selectedIndex]) {
-        filtered[selectedIndex].action();
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [isOpen, onClose, filtered, selectedIndex]);
+    if (!open) return;
+    setQ('');
+    setIdx(0);
+    getLenis()?.stop();
+    setTimeout(() => input.current?.focus(), 30);
+    return () => getLenis()?.start();
+  }, [open]);
+
+  if (!open) return null;
+
+  const run = (a) => {
+    onClose();
+    setTimeout(a.run, 60);
+  };
+
+  const onKey = (e) => {
+    if (e.key === 'Escape') onClose();
+    if (e.key === 'ArrowDown') { e.preventDefault(); setIdx((i) => Math.min(i + 1, list.length - 1)); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); setIdx((i) => Math.max(i - 1, 0)); }
+    if (e.key === 'Enter' && list[idx]) run(list[idx]);
+  };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[70] flex items-start justify-center pt-[20vh] px-4 backdrop-blur-sm bg-primary-dark/80"
-        >
-          <motion.div
-            className="fixed inset-0"
-            onClick={onClose}
-          />
-
-          <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            className="relative w-full max-w-2xl bg-surface border-2 border-white shadow-2xl overflow-hidden z-10"
-          >
-            {/* Search input */}
-            <div className="flex items-center gap-4 px-6 py-5 border-b-2 border-surface-border">
-              <FiSearch className="text-white text-xl" />
-              <input
-                ref={inputRef}
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="TYPE A COMMAND..."
-                className="flex-1 bg-transparent text-white font-heading font-bold text-xl placeholder-text-muted focus:outline-none uppercase"
-              />
-              <kbd className="px-2 py-1 bg-primary-dark text-white font-mono text-[10px] uppercase border border-surface-border">
-                ESC
-              </kbd>
-            </div>
-
-            {/* Commands list */}
-            <div className="py-2 max-h-[400px] overflow-y-auto">
-              {filtered.length === 0 && (
-                <p className="px-6 py-8 text-center text-text-muted font-mono text-sm uppercase tracking-widest">No commands found</p>
-              )}
-              {filtered.map((cmd, i) => (
-                <button
-                  key={cmd.label}
-                  onClick={() => { cmd.action(); onClose(); }}
-                  onMouseEnter={() => setSelectedIndex(i)}
-                  className={`w-full flex items-center justify-between px-6 py-4 text-left transition-colors font-mono text-sm uppercase tracking-widest ${
-                    i === selectedIndex
-                      ? 'bg-accent text-primary-dark'
-                      : 'text-text-secondary hover:bg-surface-border hover:text-white'
-                  }`}
-                >
-                  <span>{cmd.label}</span>
-                  {i === selectedIndex && <FiArrowRight className="text-lg" />}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className="fixed inset-0 z-[160] flex items-start justify-center bg-ink/70 px-4 pt-[14vh] backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true" aria-label="Command palette">
+      <div className="w-full max-w-[560px] overflow-hidden rounded-[14px] border border-white/10 bg-ink-2 shadow-2xl" onClick={(e) => e.stopPropagation()} onKeyDown={onKey}>
+        <input
+          ref={input}
+          value={q}
+          onChange={(e) => { setQ(e.target.value); setIdx(0); }}
+          placeholder="Jump to a section, open a project…"
+          className="w-full border-b border-white/10 bg-transparent px-5 py-4 text-[16px] text-ivory outline-none placeholder:text-ivory/30"
+          aria-label="Search commands"
+        />
+        <ul className="max-h-[50vh] overflow-y-auto p-2" role="listbox" data-lenis-prevent>
+          {list.map((a, i) => (
+            <li key={a.group + a.label} role="option" aria-selected={i === idx}>
+              <button
+                onMouseEnter={() => setIdx(i)}
+                onClick={() => run(a)}
+                className={`flex w-full items-center justify-between rounded-[8px] px-3 py-2.5 text-left text-[14px] ${i === idx ? 'bg-white/[0.07] text-ivory' : 'text-ivory/70'}`}
+              >
+                {a.label}
+                <span className="label text-mute">{a.group}</span>
+              </button>
+            </li>
+          ))}
+          {!list.length && <li className="px-3 py-6 text-center text-[14px] text-ivory/40">No match.</li>}
+        </ul>
+        <div className="flex justify-between border-t border-white/10 px-5 py-2.5">
+          <span className="label text-mute">↑↓ move · Enter run</span>
+          <span className="label text-mute">Esc close</span>
+        </div>
+      </div>
+    </div>
   );
 }
